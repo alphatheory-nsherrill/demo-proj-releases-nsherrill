@@ -7,6 +7,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.absoluteValue
 import kotlin.random.Random
+import kotlin.random.nextInt
 
 @RestController
 class ControllerA {
@@ -24,5 +25,10 @@ class ControllerA {
             List(numLines) { Random.nextLong().absoluteValue.toString() }.joinToString("\n")
         )
         return "wrote $numLines lines to file"
+    }
+
+    @RequestMapping("api/v1/number")
+    fun genNumber():String{
+        return "your number is ${Random.nextInt()}"
     }
 }
