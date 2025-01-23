@@ -1,0 +1,25 @@
+name: GitHub Release Demo
+run-name: ${{ github.actor }} adding a file to release 📚
+
+on:
+  release:
+    types: [published]
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Populate Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout? 🗒️'
+        uses: actions/checkout@v3
+
+      - name: '👋 write a hello world'
+        run: |
+          cd ${{github.workspace}}
+          echo '🛞 Hello World 🛞' > helloWorld.txt
+          gh release upload ${{github.event.release.tag_name}} helloWorld.txt
+        env:
+          GITHUB_TOKEN: ${{github.TOKEN}}
+        shell: bash
